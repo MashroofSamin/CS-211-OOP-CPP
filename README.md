@@ -1,2 +1,2 @@
 # CS-OOP-CPP-Projects
-Projects worked on in OOP C++.
+Skills developed in object-oriented programming showcased in multiple projects.
