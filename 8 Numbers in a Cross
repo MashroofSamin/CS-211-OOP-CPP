@@ -1,0 +1,56 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+bool ok(int b[], int c){
+    static int a[8][5] = {
+                         {-1},                //0
+                         {0,-1},              //1     Numbers for reference:
+                         {0,-1},              //2
+                         {0,1,2,-1},          //3             0 1
+                         {0,1,3,-1},          //4           2 3 4 5
+                         {1,4,-1},            //5             6 7
+                         {2,3,4,-1},          //6
+                         {3,4,5,6,-1},        //7
+                         };
+
+    for(int i=0; i<c; i++){                   //If number is repeated return false
+        if(b[i]==b[c]){
+            return false;
+        }
+    }
+    for(int i=0; a[c][i] != -1; i++){
+        if(abs(b[a[c][i]] - b[c]) == 1){     //Checks if neighbor values differ by 1
+            return false;
+        }
+    }
+    return true;
+}
+
+void print(int b[]){                         //Prints solutions for cross
+    static int count=0;
+    cout << "Solution " << ++count << ": " << endl;
+    cout << "  " << b[0] << " " << b[1] << "  " << endl;
+    cout << b[2] << " " << b[3] << " " << b[4] << " " << b[5] << " " << endl;
+    cout << "  " << b[6] << " " << b[7] << " " << endl;
+    cout << endl;
+}
+
+void nextLine(int b[], int c){               //Backtracking
+    if(c==8){                                //If cross is complete
+        print(b);
+    }
+    else {                                   //If cross not complete
+        for (b[c]=1; b[c]<=8; b[c]++){       //Tries different values for b[c]
+            if(ok(b,c))                      //If the value is valid then it will move to next box
+                nextLine(b,c+1);
+        }
+    }
+}
+
+
+int main(){
+    int b[8];                                //Initializes array
+    nextLine(b,0);
+    return 0;
+}
