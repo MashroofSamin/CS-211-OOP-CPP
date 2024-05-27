@@ -1,0 +1,35 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int main(){
+    int b[8], c=0, count=0, i, j;
+    b[0]=0;
+
+    nc:
+        c++;
+        if(c==8) goto print;                                    //Prints if board is good
+        b[c]=-1;
+
+    nr:
+        b[c]++;
+        if(b[c]==8) goto backtrack;                             //If no available in column, backtrack
+        for(i=0; i<c; i++){
+            if((b[i]==b[c]) || (c-i==abs(b[c]-b[i]))) goto nr;  //Row and Diagonal test
+        }
+        goto nc;
+
+    backtrack:
+        c--;
+        if(c==-1) return 0;                                     //If backtrack goes to the beginning
+        goto nr;
+
+    print:
+        count++;                                                //Checks number of solutions
+        cout << "Solution " << count << ": " << endl;
+        for(i=0; i<8; i++){
+            cout << b[i] << " ";
+        }
+        cout << endl << endl;
+        goto backtrack;                                         //Searches for more solutions
+    }
