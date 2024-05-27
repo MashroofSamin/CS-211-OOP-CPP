@@ -1,0 +1,35 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+string generateString(string str){
+    string res;                                                                 //Setting auxillary variable
+    int i = 0;
+    while(i<str.size()){
+        char ch = str[i];
+        if(ch == '#'){
+            if(!res.empty()){                                                   //If there is a letter to delete behind #
+                res.pop_back();                                                 //Delete last letter
+            }
+            i++;
+        } else {
+            res += ch;                                                          //Adds the letter to the auxillary variable
+            i++;
+        }
+    }
+    return res;
+}
+
+int main(){
+    string s, t;
+    cout << "Enter string #1 consisting of lowercase letters and #: " << endl;
+    cin >> s;
+    cout << "Enter string #2 consisting of lowercase letters and #: " << endl;
+    cin >> t;
+    if(generateString(s)==generateString(t)){                                   //Compares both strings after unwanted letters are gone
+        cout << s << " and " << t << " are equal." << endl;
+    } else {
+    cout << s << " and " << t << " are NOT equal." << endl;
+    }
+    return 0;
+}
