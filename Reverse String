@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+
+void reverseString(char* s, int length){
+    int left=0;
+    int right=length-1;
+    while(left<right){                           //Reverses letters until it reaches the middle
+        char temp=s[left];                       //Holds the value of the left letter
+        s[left++]=s[right];                      //Gives the right letter's value to left letter
+        s[right--]=temp;                         //Right letter recieves the left letter's value
+    }
+}
+
+int main(){
+    string str;
+    cout << "Input a string: " << endl;
+    cin >> str;
+    int length=str.length();
+    char*s=&str[0];                              //Assigns memory address to first character of string
+    reverseString(s, length);                    //Uses function to swap letters
+    cout << "The reverse of the string inputted is: " << s << endl;
+    return 0;
+}
