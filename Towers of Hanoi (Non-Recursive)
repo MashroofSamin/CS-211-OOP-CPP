@@ -1,0 +1,52 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main(){
+    vector<int> tower[3];                                       //Makes vectors of 3 towers
+    int n;
+    cout << "Enter an amount of rings: " << endl;
+    cin >> n;
+    cout << endl;
+
+    int base=0, destination, move=0, candidate=1;
+    if(n%2==0)                                                  //Check if amount of rings are odd or even
+        destination=2;
+    else{
+        destination=1;
+    }
+    for(int i=n; i>0; --i)
+        tower[0].push_back(i);                                  //Puts all rings in first tower
+    while(tower[1].size() != n){                                //While tower 1 doesn't have all rings
+        cout << "Move #" << ++move << ": Move ring " << candidate << " from tower " << char(base+'A') << " to tower " << char(destination+'A') << endl;
+        tower[destination].push_back(tower[base].back());
+        tower[base].pop_back();
+        if(tower[1].size()!=n){                                 //Checks if all rings return back to tower 1 the program ends
+            if(tower[(destination+2)%3].empty())                //If 2 towers are empty choose the tower with the rings to move
+                base=(destination+1)%3;
+            else if(tower[(destination+1)%3].empty())
+                base=(destination+2)%3;
+            else{
+                if((tower[(destination+1)%3].back())<(tower[(destination+2)%3].back()))
+                    base=(destination+1)%3;
+                else
+                    base=(destination+2)%3;
+            }
+            candidate=tower[base].back();                       //Lowest value ring from all towers
+            if(n%2==0){                                         //In the situation where n is even
+                if((tower[(base+2)%3].empty()) || (candidate < tower[(base+2)%3].back()))
+                    destination=(base+2)%3;
+                else
+                    destination=(base+1)%3;
+                }
+                else
+                {
+                    if((tower[(base+1)%3].empty()) || (candidate < tower[(base+1)%3].back()))
+                        destination=(base+1)%3;
+                    else
+                        destination=(base+2)%3;
+                }
+            }
+        }
+    return 0;
+}
