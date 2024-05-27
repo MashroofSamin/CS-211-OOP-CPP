@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+    int i=0;
+    int x=0;
+    int y=0;
+
+        while(x%2==0 || y%2==0){
+            i++;
+            x=(i*i)%10;
+            y=((i*i)/10)%10;
+        }
+
+    cout << "The first perfect square whose last two digits are both odd is: " << i*i << endl;
+
+    return 0;
+}
