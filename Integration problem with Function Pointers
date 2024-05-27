@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+
+typedef double(*FUNC)(double);  //Setting FUNC as type name for pointer to function
+double integrate(FUNC f, double a, double b){  //Function to take in doubles and return doubles
+    double sum=0.0;
+    for(double x=a; x<=b; x+=.0001){           //Makes all rectangles under curve
+        sum+=f(x)*0.0001;                      //Adds areas of the rectangles
+    }
+    return sum;
+}
+
+double line(double x){                         //Checks area under line
+    return x;
+}
+
+double square(double x){                       //Checks area under squared
+    return x*x;
+}
+
+double cube(double x){                         //Checks area under cubed
+    return x*x*x;
+}
+
+int main(){
+    cout<<"The integral of f(x)=x between 1 and 5 is: " << integrate(line, 1, 5)<<endl;
+    cout<<"The integral of f(x)=x^2 between 1 and 5 is: "<<integrate(square, 1, 5)<<endl;
+    cout<<"The integral of f(x)=x^3 between 1 and 5 is: "<<integrate(cube, 1, 5)<<endl;
+    return 0;
+}
